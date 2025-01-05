@@ -20,10 +20,8 @@ pipeline {
 					sh '''
 						if [ ${RANDOM_NUMBER} -lt 16535 ]; then
 							echo "Sideshow Bob"
-							$? = 1
 						else
 							echo "Kippers for breakfast, Aunt Helga?"
-							$? = 0
 						fi
 					'''
 				}
