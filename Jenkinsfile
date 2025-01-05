@@ -1,5 +1,12 @@
 pipeline {
-	agent any
+	agent {
+		label "!windows"
+	}
+
+	environment {
+		RANDOM_NUMBER = "${Math.abs(new Random().nextInt(32768))}"
+	}
+
 	stages {
 		stage("build") {
 			steps {
@@ -11,7 +18,7 @@ pipeline {
 
 				retry(3) {
 					sh '''
-						if [ $RANDOM -lt 16535 ]; then
+						if [ ${RANDOM_NUMBER} -lt 16535 ]; then
 							echo "Sideshow Bob"
 							exit 1
 						else
