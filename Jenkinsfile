@@ -4,7 +4,7 @@ pipeline {
 	}
 
 	stages {
-		stage("build") {
+		stage("Build") {
 			environment {
 				RANDOM_NUMBER = "${Math.abs(new Random().nextInt(32768))}"
 			}
@@ -17,7 +17,7 @@ pipeline {
 
 				retry(1) {
 					sh '''
-						if [ ${RANDOM_NUMBER} -lt 16535 ]; then
+						if [ ${RANDOM_NUMBER} -lt 8192 ]; then
 							echo "Sideshow Bob"
 							exit 1
 						else
@@ -29,6 +29,29 @@ pipeline {
 				timeout(time: 3, unit: "SECONDS") {
 					echo "just for reference purposes"
 				}
+			}
+		}
+		stage("Test") {
+			steps {
+				echo "Tests finished"
+			}
+		}
+		stage("Deploy - Staging") {
+			steps {
+				echo "Deploying on staging system..."
+				echo "Deployed on staging system"
+				echo "Running tests on staging system..."
+			}
+		}
+		stage("Sanity check") {
+			steps {
+				input "Does the staging environment look ok?"
+			}
+		}
+		stage("Deploy - Production") {
+			steps {
+				echo "Deploying on production system..."
+				echo "Deployed on production system"
 			}
 		}
 	}
