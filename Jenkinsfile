@@ -3,12 +3,11 @@ pipeline {
 		label "!windows"
 	}
 
-	environment {
-		RANDOM_NUMBER = "${Math.abs(new Random().nextInt(32768))}"
-	}
-
 	stages {
 		stage("build") {
+			environment {
+				RANDOM_NUMBER = "${Math.abs(new Random().nextInt(32768))}"
+			}
 			steps {
 				echo "Let's go to the mall today!"
 				sh '''
