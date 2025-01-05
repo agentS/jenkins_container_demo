@@ -39,14 +39,14 @@ pipeline {
 		}
 		success {
 			echo "This command will only run in case of a successful build"
-			mail to: "lukas.schoerghuber@posteo.at"
-				 subject: "Succeeded Pipeline: ${currentBuild.fullDisplayName}"
+			mail to: "lukas.schoerghuber@posteo.at",
+				 subject: "Succeeded Pipeline: ${currentBuild.fullDisplayName}",
 				 body: "Build results available at ${env.BUILD_URL}"
 		}
 		failure {
 			echo "This will run only in case of a failed build"
-			mail to: "lukas.schoerghuber@posteo.at"
-				 subject: "Failed Pipeline: ${currentBuild.fullDisplayName}"
+			mail to: "lukas.schoerghuber@posteo.at",
+				 subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
 				 body: "Something is wrong with ${env.BUILD_URL}"
 		}
 		unstable {
