@@ -18,11 +18,12 @@ pipeline {
 
 				retry(3) {
 					sh '''
-						if [ ${RANDOM_NUMBER} -lt 16535 ]; then
+						if [ ${Math.abs(new Random().nextInt(32768))} -lt 16535 ]; then
 							echo "Sideshow Bob"
-							exit 1
+							$? = 1
 						else
 							echo "Kippers for breakfast, Aunt Helga?"
+							$? = 0
 						fi
 					'''
 				}
